@@ -52,17 +52,17 @@ Now, your PHP application is set up with the required dependencies using Compose
 - Navigate to the `paypal` directory
 - Run the following to start built-in web server
 ```bash
-php -S localhost:800
+php -S localhost:8000
 ```
   The terminal will show
   ```bash
   PHP 8.1.17 Development Server started at Thu Jul 7 10:43:28 2023
-  Listening on http://localhost:800
+  Listening on http://localhost:8000
   Document root is /home/computer/paypal
   Press Ctrl-C to quit
   ```
 
-- Open your web browser and navigate to http://localhost:800 to access the application.
+- Open your web browser and navigate to http://localhost:8000 to access the application.
 
 
 
