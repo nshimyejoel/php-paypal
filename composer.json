@@ -1,8 +1,5 @@
 {
-    "require": {
-        "league/omnipay": "^3.2",
-        "omnipay/paypal": "^3.0"
-    },
+    "require": {},
     "config": {
         "allow-plugins": {
             "php-http/discovery": true

@@ -13,40 +13,56 @@ Before getting started with this application, make sure you have completed the f
    - Start testing your application in the PayPal sandbox environment.
    - Once testing is complete, you can switch your application to the live environment.
 
-2. Install XAMPP and Set Up the Environment:
-   - Download and install [XAMPP](https://www.apachefriends.org/index.html) if you haven't already.
-   - [XAMPP](https://www.apachefriends.org/index.html) must be 8.1.17 / PHP 8.1.17 or higher
-   - Locate the `htdocs` directory in your XAMPP installation.
-   - Create a new directory called `paypal` within the `htdocs` directory.
+2. Install PHP to your computer:
+   - Download and install [PHP](https://www.php.net/downloads.php) if you haven't already.
+   - [PHP](https://www.php.net/downloads.php) version  must be  8.1.17 or higher
+   
 3. Install Composer:
    - Visit [getcomposer](https://getcomposer.org/download/) and follow the instructions to download and install Composer based on your operating system if you haven't already.
 
 ## Installation
 To integrate PayPal REST API functionality into your PHP application, we will be using the `Omnipay` package. Follow the steps below to install the library:
 
-1. Open  terminal or command prompt.
-2. navigate to the `paypal` directory  created in step 2.
-3. Run the following command to install the required packages:
+1. Navigate to the directory where you want to create the `paypal` directory and create the directory.
+2. Open  terminal or command prompt.
+3. Navigate to the `paypal` directory  created in step 1.
+4. Clone the project to `paypal` directory
+5. Run the following command to install the required packages:
 
 ```bash
 composer require league/omnipay omnipay/paypal
 ```
-  - Composer will download and install the necessary dependencies
+ Composer will download and install the necessary dependencies
 
-4. Open the `config.php` file in a text editor make the following changes
+6. Open the `config.php` file in a text editor make the following changes
 
 ```php
 define('CLIENT_ID', 'your sandbox client_id');
 define('CLIENT_SECRET', 'your sandbox client_secret');
 
 ```
-- Replace 'your sandbox client_id' and 'your sandbox client_secret' with the client ID and secret you obtained from the PayPal sandbox environment.
+Replace `your sandbox client_id` and `your sandbox client_secret` with the client ID and secret you obtained from the PayPal sandbox environment.
 
 ## Usage
 Now, your PHP application is set up with the required dependencies using Composer, and you can start using PayPal REST API for online payments.
 
-- Start your XAMPP server.
-- Open your web browser and navigate to http://localhost/paypal to access the application.
+### instructions on how to start the Built-in web server for PHP
+
+- Open  terminal or command prompt.
+- Navigate to the `paypal` directory
+- Run the following to start built-in web server
+```bash
+php -S localhost:8000
+```
+  The terminal will show
+  ```bash
+  PHP 8.1.17 Development Server started at Thu Jul 7 10:43:28 2023
+  Listening on http://localhost:8000
+  Document root is /home/computer/paypal
+  Press Ctrl-C to quit
+  ```
+
+- Open your web browser and navigate to http://localhost:8000 to access the application.
 
 
 
