@@ -4,7 +4,7 @@ require_once 'config.php';
 if (isset($_POST['submit'])) {
     $amount = $_POST['amount'];
 
-    
+
     $authUrl = 'https://api.sandbox.paypal.com/v1/oauth2/token';
     $clientId = urlencode(CLIENT_ID);
     $clientSecret = urlencode(CLIENT_SECRET);
@@ -16,10 +16,10 @@ if (isset($_POST['submit'])) {
     curl_setopt($ch, CURLOPT_USERPWD, $clientId . ':' . $clientSecret);
     curl_setopt($ch, CURLOPT_POSTFIELDS, 'grant_type=client_credentials');
 
-    $headers = array(
+    $headers = [
         'Accept: application/json',
         'Accept-Language: en_US',
-    );
+    ];
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $authResponse = curl_exec($ch);
@@ -28,36 +28,36 @@ if (isset($_POST['submit'])) {
     if (isset($authData['access_token'])) {
         $accessToken = $authData['access_token'];
 
-        
+
         $createPaymentUrl = 'https://api.sandbox.paypal.com/v1/payments/payment';
         $returnUrl = PAYPAL_RETURN_URL;
         $cancelUrl = PAYPAL_CANCEL_URL;
 
-        $paymentData = array(
+        $paymentData = [
             'intent' => 'sale',
-            'payer' => array('payment_method' => 'paypal'),
-            'transactions' => array(
-                array(
-                    'amount' => array(
+            'payer' => ['payment_method' => 'paypal'],
+            'transactions' => [
+                [
+                    'amount' => [
                         'total' => $amount,
                         'currency' => PAYPAL_CURRENCY
-                    )
-                )
-            ),
-            'redirect_urls' => array(
+                    ]
+                ]
+            ],
+            'redirect_urls' => [
                 'return_url' => $returnUrl,
                 'cancel_url' => $cancelUrl
-            )
-        );
+            ]
+        ];
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $createPaymentUrl);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
-            'Authorization: Bearer '. $accessToken
-        ));
+            'Authorization: Bearer ' . $accessToken
+        ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($paymentData));
 
         $paymentResponse = curl_exec($ch);
@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
         if (isset($paymentData['id'])) {
             $paymentId = $paymentData['id'];
 
-            
+
             $approvalUrl = null;
             foreach ($paymentData['links'] as $link) {
                 if ($link['rel'] === 'approval_url') {
@@ -85,13 +85,13 @@ if (isset($_POST['submit'])) {
             echo "Payment creation failed: " . $paymentData['error_description'];
         } else {
             echo "Payment creation failed. Error Response: ";
-            var_dump($paymentData);
+
         }
     } elseif (isset($authData['error']) && isset($authData['error_description'])) {
         echo "Failed to obtain PayPal access token: " . $authData['error_description'];
     } else {
         echo "Failed to obtain PayPal access token. Error Response: ";
-        var_dump($authData);
+
     }
 }
 ?>
