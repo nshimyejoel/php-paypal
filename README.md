@@ -21,7 +21,7 @@ Before getting started with this application, make sure you have completed the f
    - Visit [getcomposer](https://getcomposer.org/download/) and follow the instructions to download and install Composer based on your operating system if you haven't already.
 
 ## Installation
-To integrate PayPal REST API functionality into your PHP application, we will be using the `Omnipay` package. Follow the steps below to install the library:
+To integrate PayPal REST API functionality into your PHP application, we will be using the `Guzzle`. Follow the steps below to install the library:
 
 1. Navigate to the directory where you want to create the `paypal` directory and create the directory.
 2. Open  terminal or command prompt.
@@ -30,7 +30,7 @@ To integrate PayPal REST API functionality into your PHP application, we will be
 5. Run the following command to install the required packages:
 
 ```bash
-composer require league/omnipay omnipay/paypal
+composer require guzzlehttp/guzzle
 ```
  Composer will download and install the necessary dependencies
 
