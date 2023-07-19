@@ -1,20 +1,20 @@
 <?php
+$url_path = isset($_GET['url']) ? $_GET['url'] : '';
 
-$url = isset($_GET['url']) ? $_GET['url'] : '';
-switch ($url) {
-    case '':
-        require 'welcome.php';
-        break;
-    case 'home':
-        require 'home.php';
-        break;
-    case 'about':
-        require 'about.php';
-        break;
-    case 'charge':
-        require 'charge.php';
-        break;
-    default:
-        http_response_code(404);
-        break;
+$url = parse_url($url_path)['path'];
+
+$routes = [
+    '' => 'welcome.php',
+    'home' => 'home.php',
+    'about' => 'about.php',
+    'charge' => 'charge.php',
+    'cancel' => 'cancel.php',
+    'success' => 'success.php',
+];
+
+
+if (array_key_exists($url,$routes)){
+    require $routes[$url];
+}else{
+    http_response_code(404);
 }
