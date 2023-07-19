@@ -34,7 +34,7 @@ if (array_key_exists('paymentId', $_GET) && array_key_exists('PayerID', $_GET)) 
                         <h5 class="card-title mt-4">Payment Successful</h5>
                         <p class="card-text">Your payment has been successfully processed.</p>
                         <p class="card-text"><b>Transaction ID:</b> <?php echo $payment_id?></p>
-                        <a href="index.php" class="btn btn-primary">Continue to Home</a>
+                        <a href="home" class="btn btn-primary">Continue to Home</a>
                     </div>
                 </div>
             </div>
