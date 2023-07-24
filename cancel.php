@@ -25,7 +25,7 @@
   <!-- Header -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Payment</a>
-    <a class="navbar-brand ml-auto" href="index.php">Home</a>
+    <a class="navbar-brand ml-auto" href="home">Home</a>
     
   </nav>
 
