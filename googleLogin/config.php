@@ -1,8 +1,8 @@
 <?php
 
 
-const CLIENT_ID = '769078040402-0hlqtsf1pim43srkrn6o43konu4hmkpu.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
+const CLIENT_ID = 'client id';
+const CLIENT_SECRET = 'secret id';
 const REDIRECT_URL = 'http://localhost/paypal/googleLogin/';
 
 
