@@ -1,7 +1,6 @@
 <?php
-$url_path = isset($_GET['url']) ? $_GET['url'] : '';
 
-$url = parse_url($url_path)['path'];
+$url = parse_url($_GET['url'] ?? '')['path'];
 
 $routes = [
     '' => 'welcome.php',
