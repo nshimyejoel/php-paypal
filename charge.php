@@ -8,13 +8,11 @@ if (isset($_POST['submit'])) {
     $amount = $_POST['amount'];
 
     $auth_url = 'https://api.sandbox.paypal.com/v1/oauth2/token';
-    $client_id = CLIENT_ID;
-    $client_secret = CLIENT_SECRET;
-
+   
     $client = new Client();
 
     $auth_response = $client->request('post', $auth_url, [
-        'auth' => [$client_id, $client_secret],
+        'auth' => [CLIENT_ID,CLIENT_SECRET],
         'form_params' => ['grant_type' => 'client_credentials'],
         'headers' => [
             'Accept' => 'application/json',
@@ -28,9 +26,7 @@ if (isset($_POST['submit'])) {
         $access_token = $auth_data['access_token'];
 
         $create_payment_url = 'https://api.sandbox.paypal.com/v1/payments/payment';
-        $return_url = PAYPAL_RETURN_URL;
-        $cancel_url = PAYPAL_CANCEL_URL;
-
+        
         $payment_data = [
             'intent' => 'sale',
             'payer' => ['payment_method' => 'paypal'],
@@ -43,8 +39,8 @@ if (isset($_POST['submit'])) {
                 ]
             ],
             'redirect_urls' => [
-                'return_url' => $return_url,
-                'cancel_url' => $cancel_url
+                'return_url' => PAYPAL_RETURN_URL,
+                'cancel_url' => PAYPAL_CANCEL_URL
             ]
         ];
 
@@ -86,4 +82,3 @@ if (isset($_POST['submit'])) {
         echo "Failed to obtain PayPal access token. Error Response: ";
     }
 }
-?>
