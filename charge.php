@@ -11,14 +11,7 @@ if (isset($_POST['submit'])) {
    
     $client = new Client();
 
-    $auth_response = $client->request('post', $auth_url, [
-        'auth' => [CLIENT_ID,CLIENT_SECRET],
-        'form_params' => ['grant_type' => 'client_credentials'],
-        'headers' => [
-            'Accept' => 'application/json',
-            'Accept-Language' => 'en_US',
-        ],
-    ]);
+    $auth_response = $client->request('post', $auth_url, ['auth' => [CLIENT_ID,CLIENT_SECRET],'form_params' => ['grant_type' => 'client_credentials'], 'headers' => [ 'Accept' => 'application/json', 'Accept-Language' => 'en_US', ]]);
 
     $auth_data = json_decode($auth_response->getBody(), true);
 
@@ -44,13 +37,7 @@ if (isset($_POST['submit'])) {
             ]
         ];
 
-        $payment_response = $client->request('post', $create_payment_url, [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $access_token
-            ],
-            'json' => $payment_data,
-        ]);
+        $payment_response = $client->request('post', $create_payment_url, ['headers' => [ 'Content-Type' => 'application/json', 'Authorization' => 'Bearer ' . $access_token ],'json' => $payment_data ]);
 
         $payment_data = json_decode($payment_response->getBody(), true);
 
