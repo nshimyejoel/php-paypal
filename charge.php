@@ -7,19 +7,27 @@ use GuzzleHttp\Client;
 if (isset($_POST['submit'])) {
     $amount = $_POST['amount'];
 
-    $auth_url = 'https://api.sandbox.paypal.com/v1/oauth2/token';
-   
     $client = new Client();
 
-    $auth_response = $client->request('post', $auth_url, ['auth' => [CLIENT_ID,CLIENT_SECRET],'form_params' => ['grant_type' => 'client_credentials'], 'headers' => [ 'Accept' => 'application/json', 'Accept-Language' => 'en_US', ]]);
+    $auth_response = $client->request('post','https://api.sandbox.paypal.com/v1/oauth2/token', [
+        'auth' => [
+            CLIENT_ID,
+            CLIENT_SECRET
+        ],
+        'form_params' => [
+            'grant_type' => 'client_credentials'
+        ],
+        'headers' => [
+            'Accept' => 'application/json',
+            'Accept-Language' => 'en_US'
+        ]
+    ]);
 
     $auth_data = json_decode($auth_response->getBody(), true);
 
     if (isset($auth_data['access_token'])) {
         $access_token = $auth_data['access_token'];
 
-        $create_payment_url = 'https://api.sandbox.paypal.com/v1/payments/payment';
-        
         $payment_data = [
             'intent' => 'sale',
             'payer' => ['payment_method' => 'paypal'],
@@ -37,7 +45,13 @@ if (isset($_POST['submit'])) {
             ]
         ];
 
-        $payment_response = $client->request('post', $create_payment_url, ['headers' => [ 'Content-Type' => 'application/json', 'Authorization' => 'Bearer ' . $access_token ],'json' => $payment_data ]);
+        $payment_response = $client->request('post','https://api.sandbox.paypal.com/v1/payments/payment', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $access_token
+            ],
+            'json' => $payment_data
+        ]);
 
         $payment_data = json_decode($payment_response->getBody(), true);
 
@@ -51,6 +65,7 @@ if (isset($_POST['submit'])) {
                     break;
                 }
             }
+
 
             if ($approval_url) {
                 header("Location: $approval_url");
