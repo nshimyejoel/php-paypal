@@ -1,24 +1,9 @@
 <?php
 require_once 'config.php';
  
-// Once the transaction has been approved, we need to complete it.
 if (array_key_exists('paymentId', $_GET) && array_key_exists('PayerID', $_GET)) {
-    $transaction = $gateway->completePurchase(array(
-        'payer_id'             => $_GET['PayerID'],
-        'transactionReference' => $_GET['paymentId'],
-    ));
-    $response = $transaction->send();
- 
-    if ($response->isSuccessful()) {
-        // The customer has successfully paid.
-        $arr_body = $response->getData();
- 
-        $payment_id = $arr_body['id'];
-        $payer_id = $arr_body['payer']['payer_info']['payer_id'];
-        $payer_email = $arr_body['payer']['payer_info']['email'];
-        $amount = $arr_body['transactions'][0]['amount']['total'];
-        $currency = PAYPAL_CURRENCY;
-        $payment_status = $arr_body['state'];
+    $payment_id = $_GET['paymentId'];
+    $payer_id = $_GET['PayerID'];
  
  ?>
 
@@ -49,7 +34,7 @@ if (array_key_exists('paymentId', $_GET) && array_key_exists('PayerID', $_GET)) 
                         <h5 class="card-title mt-4">Payment Successful</h5>
                         <p class="card-text">Your payment has been successfully processed.</p>
                         <p class="card-text"><b>Transaction ID:</b> <?php echo $payment_id?></p>
-                        <a href="index.php" class="btn btn-primary">Continue to Home</a>
+                        <a href="home" class="btn btn-primary">Continue to Home</a>
                     </div>
                 </div>
             </div>
@@ -65,9 +50,6 @@ if (array_key_exists('paymentId', $_GET) && array_key_exists('PayerID', $_GET)) 
 
  <?php
     
-    } else {
-        echo $response->getMessage();
-    }
 } else {
     echo 'Transaction is declined';
 }

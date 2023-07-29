@@ -1,0 +1,59 @@
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #343a40;
+      color: #fff;
+      padding: 1rem;
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #fff;
+      margin-left: 1rem;
+    }
+
+    .content {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .display-4 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer {
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }

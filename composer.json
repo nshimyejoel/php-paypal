@@ -1,8 +1,5 @@
 {
-    "require": {},
-    "config": {
-        "allow-plugins": {
-            "php-http/discovery": true
-        }
+    "require": {
+        "guzzlehttp/guzzle": "^7.7"
     }
 }
